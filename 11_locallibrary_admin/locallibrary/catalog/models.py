@@ -27,6 +27,8 @@ class Book(models.Model):
     # Author as a string rather than object because it hasn't been
     # declared yet in the file
     author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True)
+    library_event = models.ForeignKey("LibraryEvent", on_delete=models.SET_NULL, null=True)
+
 
     # Summary is a simple text field.
     summary = models.TextField(
@@ -136,3 +138,9 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f"{self.last_name}, {self.first_name}"
+
+class LibraryEvent(models.Model):
+    title = models.CharField(max_length=100)
+    datetime = models.DateTimeField()
+    location = models.CharField(max_length=100)
+    book_title = models.CharField(max_length=100)

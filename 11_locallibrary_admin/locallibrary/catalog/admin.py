@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from catalog.models import Author, Genre, Book, BookInstance
+from catalog.models import Author, Genre, Book, BookInstance, LibraryEvent
 
 admin.site.register(Genre)
 
@@ -73,3 +73,12 @@ class BookInstanceAdmin(admin.ModelAdmin):
         (None, {"fields": ("book", "imprint", "id")}),
         ("Availability", {"fields": ("status", "due_back")}),
     )
+
+
+@admin.register(LibraryEvent)
+class LibraryEventAdmin(admin.ModelAdmin):
+    list_display = ("title", "datetime", "location", "book_title")
+
+    fields = ["title", "datetime", "location"]
+
+    inlines = [BookInline]
